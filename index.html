@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X O</title>
+    <style>
+        .main-box{
+            border: green 3px solid;
+            width: 60vh;
+            height: 60vh;
+            margin: auto;
+            margin-top: 20vh;
+            
+        }
+        .box{
+            border:black 1px solid;
+            width: 20vh;
+
+            
+            align-content: center;
+        }
+        .box *{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10ch;
+            
+        }
+        .row{
+            display:flex;
+            height: 20vh;
+        }
+        #winstatus{
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 10ch;
+            color: rgb(1, 95, 121);
+            animation:normal;
+            animation:zoom 20000ms linear forwards;
+            
+
+        }
+        @keyframes zoom{
+            from{
+                size: 0;
+            }
+            to{
+                size: 10ch;
+            }
+        }
+        .wins{
+            display: flex;
+            justify-content: center;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main-box">
+        <div class="row">
+            <div class="box" onclick="put(document.getElementById('aa'))"><div id="aa"></div></div>
+            <div class="box" onclick="put(document.getElementById('ab'))"><div id="ab"></div></div>
+            <div class="box" onclick="put(document.getElementById('ac'))"><div id="ac"></div></div>
+        </div>
+        <div class="row">
+            <div class="box" onclick="put(document.getElementById('ba'))"><div id="ba"></div></div>
+            <div class="box" onclick="put(document.getElementById('bb'))"><div id="bb"></div></div>
+            <div class="box" onclick="put(document.getElementById('bc'))"><div id="bc"></div></div>
+        </div>
+        <div class="row ">
+            <div class="box" onclick="put(document.getElementById('ca'))"><div id="ca"></div></div>
+            <div class="box" onclick="put(document.getElementById('cb'))"><div id="cb"></div></div>
+            <div class="box" onclick="put(document.getElementById('cc'))"><div id="cc"></div></div>
+        </div>
+    </div>
+    <div id="winbigbox" class="wins">
+    </div>
+    <script>
+        
+        var no=0;
+        var gamestatus="armass";
+        console.log(gamestatus);
+
+        function put(ele){
+            if(gamestatus!=="win"){
+            if(ele.innerText==""){
+                if(no%2==0){
+                    ele.innerText="X";
+                }
+                else if(no%2==1){
+                    ele.innerText="O";
+                }
+                check();
+                no++;
+                
+        }
+            console.log("hi",no);
+
+        }
+    }
+        function check(){
+
+            eles=[document.getElementById("aa"),document.getElementById("ab"),document.getElementById("ac"),document.getElementById("ba"),document.getElementById("bb"),document.getElementById("bc"),document.getElementById("ca"),document.getElementById("cb"),document.getElementById("cc")];
+
+            vals=eles.map((ele)=>ele.innerText);
+            var winEle=document.createElement("div");
+            winEle.id="winstatus";
+            var [aa,ab,ac,ba,bb,bc,ca,cb,cc]=vals;
+            console.log(vals);
+
+            // aa=document.getelement byid.innerText;
+            // ab=.innerText;
+            // ac=.innerText;
+
+            // ba=.innerText;
+            // bb=.innerText;
+            // bc=.innerText;
+
+            // ca=.innerText;
+            // cb=.innerText;
+            // cc=.innerText;
+
+            if ((aa !='') && (aa == ab) && (ab == ac)) {
+                gamestatus = "win";
+            } else if ((ba !='') && (ba == bb) && (bb == bc)) {
+                gamestatus = "win";
+            } else if ((ca !='') && (ca == cb) && (cb == cc)) {
+                gamestatus = "win";
+            } else if ((aa !='') && (aa == ba) && (ba == ca)) {
+                gamestatus = "win";
+            } else if ((ab !='') && (ab == bb) && (bb == cb)) {
+                gamestatus = "win";
+            } else if ((ac !='') && (ac == bc) && (bc == cc)) {
+                gamestatus = "win";
+            } else if ((aa !='') && (aa == bb) && (bb == cc)) {
+                gamestatus = "win";
+            } else if ((ac !='') && (ac == bb) && (bb == ca)) {
+                gamestatus = "win";
+            }
+            winbigbox=document.getElementById("winbigbox");
+            console.log(gamestatus);
+            if(gamestatus=="win"){
+                
+                if(no%2==0){
+
+                    winEle.innerText="X Wins";
+                    winbigbox.appendChild(winEle);
+
+                }
+                else if(no%2==1){
+                    winEle.innerText="O Wins";
+                    winbigbox.appendChild(winEle);
+                }
+                else{
+                    winEle.innerText="draw"
+                }
+            }
+        }
+    </script>
+</body>
+</html>
